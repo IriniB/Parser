@@ -15,11 +15,13 @@ def get_content_from_page(url):
 
 
 def get_all_links():
-    url_start = 'https://bashesk.ru/corporate/tariffs/unregulated/?PAGEN_1='
-    url_end = '&filter_name=&filter_date_from=01.07.2019&filter_date_to=01.06.2020'
+    url_start = 'https://bashesk.ru/corporate/tariffs/unregulated/?'
+    url_end = 'filter_name=&filter_date_from=01.07.2019&filter_date_to=01.06.2020'
     links = []
-    for page_number in range(4):
-        links.extend(get_content_from_page(url_start + str(page_number) + url_end))
+    links.extend(get_content_from_page(url_start + url_end))
+    page_number = 2
+    while page_number < 4:
+        links.extend(get_content_from_page(url_start + 'PAGEN_1=' + str(page_number) + '&' + url_end))
         page_number += 1
     return links
 
